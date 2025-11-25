@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -85,5 +86,11 @@ class ProductController extends Controller
         //
         $product->delete();
         return redirect()->route('products.index');
+    }
+
+    public function pdf($id){
+        $product = Product::find($id);
+        $pdf = Pdf::loadView('products.pdf', compact('product'));
+        return $pdf->stream('product_'.$product->id.'.pdf');
     }
 }

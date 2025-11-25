@@ -4,152 +4,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Inventario</title>
+    <title>InventarioApp · Acceso</title>
 
-    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        :root {
+            --bg: #030711;
+            --surface: rgba(16, 23, 42, 0.85);
+            --surface-soft: rgba(255, 255, 255, 0.08);
+            --text: #f8fbff;
+            --muted: #9fb4d9;
+            --primary: #8b5cf6;
+            --accent: #14b8a6;
+        }
+
+        * {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
         body {
-            background: linear-gradient(135deg, #141e30, #243b55);
-            color: #e9ecef;
+            background: radial-gradient(circle at top, #1d2342, var(--bg) 70%);
+            color: var(--text);
             min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .card {
-            margin-top: 60px;
-            background-color: #1f2833;
-            border: 1px solid #0b0c10;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-            border-radius: 12px;
+        .hero-grid {
+            position: relative;
+            padding: 2rem;
         }
 
-        .card-header {
-            background: linear-gradient(90deg, #0b8793, #360033);
-            border-bottom: none;
+        .shine {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.25), transparent 45%),
+                radial-gradient(circle at 80% 10%, rgba(139, 92, 246, 0.3), transparent 40%);
+            filter: blur(40px);
+            z-index: 0;
         }
 
-        .card-header h4 {
-            margin: 0;
-            font-weight: bold;
+        .login-card {
+            background: var(--surface);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.45);
+            position: relative;
+            z-index: 1;
         }
 
-        .form-control {
-            background-color: #2c3e50;
-            border: 1px solid #34495e;
-            color: #e9ecef;
-        }
-
-        .form-control:focus {
-            background-color: #2c3e50;
-            border-color: #00bcd4;
-            color: #fff;
-            box-shadow: none;
+        .login-card h4 {
+            font-weight: 600;
         }
 
         label {
-            color: #cfd8dc;
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .form-control {
+            background: var(--surface-soft);
+            border: 1px solid transparent;
+            color: var(--text);
+            border-radius: 12px;
+            padding: .85rem 1rem;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--primary);
+            box-shadow: none;
+            color: var(--text);
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background: linear-gradient(120deg, var(--primary), var(--accent));
             border: none;
+            border-radius: 999px;
+            padding: .75rem 1.75rem;
+            font-weight: 600;
+            box-shadow: 0 15px 40px rgba(20, 184, 166, 0.35);
         }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
+        .btn-outline-light {
+            border-radius: 999px;
+            padding: .75rem 1.75rem;
+            border-color: rgba(255, 255, 255, 0.4);
+            color: var(--text);
         }
 
-        .btn-secondary {
-            background-color: #6c757d;
-            border: none;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-
-        .btn-success {
-            background-color: #28a745;
-            border: none;
-        }
-
-        .btn-success:hover {
-            background-color: #1e7e34;
-        }
-
-        .vector-container {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .vector-container svg {
-            width: 60%;
-            max-width: 600px;
-            height: auto;
-        }
-
-        .text-muted {
-            color: #adb5bd !important;
+        .floating-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <!-- Formulario de Login -->
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header text-center text-white">
-                        <h4>🔐 Login - Gestión de Inventario</h4>
-                    </div>
-                    <div class="card-body">
-                        <form action="#" method="POST">
-                            <!-- Correo -->
-                            <div class="form-group">
-                                <label for="email">Correo Electrónico</label>
-                                <input type="email" id="email" name="email" class="form-control" required placeholder="Ejemplo: admin@inventario.com">
-                            </div>
+    <div class="container py-5 hero-grid">
+        <div class="shine"></div>
+        <div class="row align-items-center position-relative">
+            <div class="col-lg-6 mb-5 mb-lg-0 text-white">
+                <p class="text-uppercase text-muted mb-2 small">InventarioApp</p>
+                <h1 class="display-5 font-weight-bold mb-3">Gestiona tu inventario con estilo.</h1>
+                <p class="text-muted mb-4">
+                    Visualiza tus productos, registra movimientos y obtén reportes visuales en segundos.
+                    Un panel moderno para decisiones mas rapidas.
+                </p>
 
-                            <!-- Contraseña -->
-                            <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input type="password" id="password" name="password" class="form-control" required placeholder="Ingrese su contraseña">
-                            </div>
-
-                            <!-- Botones -->
-                            <div class="form-group text-center mt-4">
-                                <button type="submit" class="btn btn-primary px-4">Ingresar</button>
-                                <a href="#" class="btn btn-secondary px-4">Cancelar</a>
-                                <a href="{{route('products.index')}}" class="btn btn-success px-4">Entrar al Menu (Sin Login)</a>
-                            </div>
-                        </form>
+                <div class="floating-card">
+                    <div class="d-flex align-items-center">
+                        <div class="mr-3">
+                            <span class="badge badge-pill badge-light text-dark">Nuevo</span>
+                        </div>
+                        <div>
+                            <h6 class="mb-0 text-white">Dashboard con graficos</h6>
+                            <small class="text-muted">Explora indicadores en tiempo real despues de iniciar
+                                sesion.</small>
+                        </div>
                     </div>
+                </div>
+
+            </div>
+            <div class="col-lg-5 ml-lg-auto">
+                <div class="card login-card p-4 p-lg-5">
+                    <h4 class="mb-2">Bienvenido de nuevo</h4>
+                    <p class="text-muted mb-4">Ingresa tus credenciales para continuar.</p>
+
+                    <form action="{{ route('login.perform') }}" method="POST" novalidate>
+                        @csrf
+                        <div class="form-group">
+                            <label for="email">Correo electronico</label>
+                            <input type="email" id="email" name="email" class="form-control"
+                                placeholder="admin@inventario.com" value="{{ old('email') }}" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contrasena</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="********" required>
+                        </div>
+
+                        @if ($errors->has('email'))
+                            <div class="alert alert-danger border-0 rounded-lg">
+                                {{ $errors->first('email') }}
+                            </div>
+                        @endif
+
+                        <div class="mt-4 d-flex flex-column">
+                            <button type="submit" class="btn btn-primary mb-2">Iniciar sesion</button>
+                            <button type="reset" class="btn btn-outline-light mb-2">Limpiar</button>
+                            
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <!-- Vector alusivo al inventario -->
-        <div class="vector-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 901.5 700">
-                <rect width="901.5" height="700" fill="#141e30"/>
-                <rect x="180" y="300" width="120" height="300" fill="#00bcd4" opacity="0.9"/>
-                <rect x="340" y="220" width="120" height="380" fill="#4caf50" opacity="0.9"/>
-                <rect x="500" y="260" width="120" height="340" fill="#ffc107" opacity="0.9"/>
-                <rect x="660" y="180" width="120" height="420" fill="#e91e63" opacity="0.9"/>
-                <path d="M160 290l690-150v-30L160 260z" fill="#ffffff" opacity="0.1"/>
-                <circle cx="200" cy="630" r="15" fill="#adb5bd"/>
-                <circle cx="700" cy="630" r="15" fill="#adb5bd"/>
-                <text x="250" y="660" font-size="22" fill="#ffffff" font-family="Arial, sans-serif">
-                    Sistema de Gestión de Inventario
-                </text>
-            </svg>
-        </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

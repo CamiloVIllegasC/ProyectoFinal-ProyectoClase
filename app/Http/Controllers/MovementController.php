@@ -6,6 +6,10 @@ use App\Models\Movement;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+
+use function Illuminate\Log\log;
 
 class MovementController extends Controller
 {
@@ -47,10 +51,10 @@ class MovementController extends Controller
         $movement->type = $request->type;
         $movement->ammount = $request->ammount;
         $movement->sale_point = $request->sale_point;
-        $movement->product_id = $request->product;
+        $movement->product_id = $request->product_id;
         $movement->save();
 
-        $product = Product::find($request->product);
+        $product = Product::find($request->product_id);
         try {
             switch($movement->type){
                 case Movement::MOVEMENT_TYPES_IN:
@@ -61,9 +65,17 @@ class MovementController extends Controller
                     if ($product->ammount < $movement->ammount){
                         throw new \Exception("La cantidad solicitada supera la cantidad disponible");
                     }
+                    $product->decrement('ammount', $movement->ammount);
+                break;
             }
-        } catch (\Throwable $th) {
+            $product->save();
+        } catch (\Throwable $ex) {
+            Log::error('Error al tratar de realizar el movimiento');
+            Session::flash('error', $ex->getMessage());
+            DB::rollBack();
         }
+        DB::commit();
+        return redirect()->route('movements.index');
     }
 
     /**
